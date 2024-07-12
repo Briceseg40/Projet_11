@@ -1,8 +1,8 @@
 import React from 'react'
-import KasaRouter from './KasaRouter'
+import ArgentBankRouter from './ArgentBankRouter'
 
 function App () {
-    return <KasaRouter/>
+    return <ArgentBankRouter/>
 }
 
 export default App
