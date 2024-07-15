@@ -6,7 +6,9 @@ html {
   color: #2c3e50;
 }
 #root {
-  display: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 body {
   margin: 0;
@@ -21,6 +23,7 @@ body {
 
 .bg-dark {
   background-color: #12002b;
+  padding-bottom: 32px;
 }
 
 .sr-only {
@@ -56,6 +59,10 @@ body {
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+}
+
+.main-nav-item i {
+  margin-right: 4px;
 }
 
 .main-nav-item:hover {
@@ -266,6 +273,12 @@ body {
   margin-bottom: 2rem;
 }
 
+.header h1 {
+  padding: 21px 0;
+  margin: 0;
+}
+
+
 .transaction-button {
   display: block;
   width: 100%;
@@ -290,4 +303,30 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+/*Formulaire pour changer le pseudo */
+
+.popup-overlay {
+
+  display: flex;
+  position: absolute;
+  justify-content: center; 
+  align-items: center;    
+  height: 100vh; 
+  width: 100vw;
+}
+.popup {
+  background-color: white;
+  border: 5px solid #6ebf62;
+  padding: 20px;
+  height: auto; 
+}
+
+.popup form {
+  display: flex;
+  flex-direction: column;
+}
+.popup form input, .popup form button {
+  margin: 5px 0;
 }

@@ -2,23 +2,8 @@ import React, { useState } from 'react'
 import { loginReducer } from '../redux/store/loginSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { loginUser } from './Api'
 import './css/main.css';
-
-async function loginUser(credentials) {
-  const response = await fetch('http://localhost:3001/api/v1/user/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  })
-  if (response.ok) {
-    const result = await response.json()
-    return result.body.token
-  } else {
-    throw new Error('Email ou mot de passe incorrect.')
-  }
-}
 
 function SignIn() {
   const [email, setEmail] = useState('')
