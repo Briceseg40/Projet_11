@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { changeUserName } from './Api';
 import { loginReducer } from '../redux/store/loginSlice';
+import fetchProfile from '../redux/action/fetchProfile';
 import './css/main.css';
 
 function AccountPage() {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [newUsername, setNewUsername] = useState('');
-  const username = useSelector((state) => state.login.username); 
+  const username = useSelector((state) => state.login.username);
   const token = useSelector((state) => state.login.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const handleEditButtonClick = () => {
     setIsPopupVisible(true);
@@ -27,7 +31,7 @@ function AccountPage() {
 
     try {
       if (token) {
-        await changeUserName(credentialsUser, token); 
+        await changeUserName(credentialsUser, token);
         dispatch(loginReducer({ username: newUsername }));
         setIsPopupVisible(false);
       } else {
@@ -37,6 +41,16 @@ function AccountPage() {
       alert(error);
     }
   }
+  const fetchUserProfile = useCallback(() => {
+    dispatch(fetchProfile())
+  }, [dispatch])
+  useEffect(() => {
+    if (!token) {
+      navigate('/')
+    } else {
+      fetchUserProfile()
+    }
+  }, [token, navigate, fetchUserProfile])
 
   return (
     <>
